@@ -19,12 +19,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package main
+package styles
 
-import (
-	"github.com/BRO3886/apollo/cmd"
-)
+import "github.com/ttacon/chalk"
 
-func main() {
-	cmd.Execute()
-}
+// WarnStyle style for decorating WARN text
+var WarnStyle = chalk.Bold.NewStyle().WithBackground(chalk.Yellow).WithForeground(chalk.Black)
+
+// InfoStyle style for decorating INFO text
+var InfoStyle = chalk.Bold.NewStyle().WithBackground(chalk.ResetColor).WithForeground(chalk.Green)
+
+// ErrorStyle style for decorating ERROR text
+var ErrorStyle = chalk.Bold.NewStyle().WithBackground(chalk.ResetColor).WithForeground(chalk.Red)

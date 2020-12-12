@@ -2,6 +2,12 @@
 
 A CLI Tool to manage your VMs
 
-Created for [HackOffv3](https://hackoff.tech)
+Created for [HackOff 3.0](https://hackoff.tech)
 
-Submitted under GE Healthcare problem statement
+> Submitted under GE Healthcare problem statement
+
+# Instructions to Install
+:todo
+
+# List of available commands
+:todo

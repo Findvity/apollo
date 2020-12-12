@@ -1,4 +1,4 @@
-module github.com/BRO3886/ge_healthcare
+module github.com/BRO3886/apollo
 
 go 1.15
 

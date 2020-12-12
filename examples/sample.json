@@ -1,0 +1,18 @@
+[
+  {
+    "id":"1",
+    "info":"step 1",
+    "input":"ls",
+    "expected":[
+      "LICENSE  README.md  cmd  examples  go.mod  go.sum  internal  main.go"
+    ]
+  },
+  {
+    "id":"2",
+    "info":"step 2",
+    "input":"pwd",
+    "expected":[
+      "/home/sidv/go_projs/cli_projs/ge_healthcare"
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+#binary files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+apollo
+
+# binaries folder
+bin/
+
+#editor config
+.vscode
+.idea
+

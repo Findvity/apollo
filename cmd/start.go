@@ -22,6 +22,19 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"bytes"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"os/exec"
+	"strings"
+
+	"github.com/BRO3886/apollo/internal/styles"
+
+	"github.com/BRO3886/apollo/internal/utils"
+	"github.com/ttacon/chalk"
+
+	"github.com/BRO3886/apollo/pkg/apollo"
 	"github.com/spf13/cobra"
 )
 
@@ -33,7 +46,39 @@ var startCmd = &cobra.Command{
 	use this command to begin execution step by step
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
+		d, err := ioutil.ReadFile("/home/sidv/go_projs/cli_projs/ge_healthcare/data/sample.json")
+		if err != nil {
+			utils.Err("fatal", "unable to read data")
+			os.Exit(1)
+		}
+		cmds, err := apollo.UnmarshalCommands(d)
+		if err != nil {
+			utils.Err("decode", "unable to decode data")
+			os.Exit(1)
+		}
 
+		utils.Warn("sill", "starting execution")
+		for _, c := range cmds {
+			utils.Info("sill", fmt.Sprintf("%s %s", "now executing:", chalk.Yellow.Color("Step "+c.ID)))
+			fmt.Println(strings.Repeat("-", len(c.Info)))
+			fmt.Println(c.Info)
+			fmt.Println(strings.Repeat("-", len(c.Info)))
+			utils.Info("cmd", fmt.Sprintf("%s %s", "command:", chalk.Green.Color(c.Input)))
+			cmd := exec.Command(c.Input)
+
+			var outb, errb bytes.Buffer
+			cmd.Stdout = &outb
+			cmd.Stderr = &errb
+
+			err := cmd.Run()
+			if err != nil {
+				utils.Err("fatal", err.Error())
+				os.Exit(1)
+			}
+			fmt.Println()
+			fmt.Println(styles.InfoStyle.Style("OUTPUT"))
+			fmt.Println(outb.String())
+		}
 	},
 }
 

@@ -1,7 +1,7 @@
 [
   {
     "id":"1",
-    "info":"step 1",
+    "info":"This is a sample info for step 1. Here we try the ls command",
     "input":"ls",
     "expected":[
       "LICENSE  README.md  cmd  examples  go.mod  go.sum  internal  main.go"
@@ -9,7 +9,7 @@
   },
   {
     "id":"2",
-    "info":"step 2",
+    "info":"This is a sample info for step 2. Here we try pwd command",
     "input":"pwd",
     "expected":[
       "/home/sidv/go_projs/cli_projs/ge_healthcare"

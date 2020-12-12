@@ -30,6 +30,7 @@ import (
 	"strings"
 
 	"github.com/BRO3886/apollo/internal/styles"
+	"github.com/manifoldco/promptui"
 
 	"github.com/BRO3886/apollo/internal/utils"
 	"github.com/ttacon/chalk"
@@ -64,20 +65,53 @@ var startCmd = &cobra.Command{
 			fmt.Println(c.Info)
 			fmt.Println(strings.Repeat("-", len(c.Info)))
 			utils.Info("cmd", fmt.Sprintf("%s %s", "command:", chalk.Green.Color(c.Input)))
-			cmd := exec.Command(c.Input)
+			l := strings.Split(c.Input, " ")
 
-			var outb, errb bytes.Buffer
-			cmd.Stdout = &outb
-			cmd.Stderr = &errb
+			if l[0] == "vim" || l[0] == "nano" {
+				utils.Info("sill", "execute the above command in a new terminal instance")
+				utils.Info("sill", "continue after following the above steps and saving the file")
+			} else {
 
-			err := cmd.Run()
-			if err != nil {
-				utils.Err("fatal", err.Error())
-				os.Exit(1)
+				cmdPath, err := exec.LookPath(l[0])
+				if err != nil {
+					utils.Err("notsup", "could not find "+l[0])
+					os.Exit(1)
+				}
+				sub := l[1:]
+				sub = append([]string{""}, sub...)
+				cmd := exec.Cmd{Path: cmdPath, Args: sub}
+
+				var outb, errb bytes.Buffer
+				cmd.Stdout = &outb
+				cmd.Stderr = &errb
+
+				err = cmd.Run()
+				if err != nil {
+					utils.Err("fatal", err.Error())
+					os.Exit(1)
+				}
+				fmt.Println()
+				fmt.Println(styles.InfoStyle.Style("OUTPUT"))
+				fmt.Println(outb.String())
 			}
-			fmt.Println()
-			fmt.Println(styles.InfoStyle.Style("OUTPUT"))
-			fmt.Println(outb.String())
+			fmt.Println(styles.InfoStyle.Style("EXPECTED OUTPUT"))
+			fmt.Println(strings.Repeat("-", len(c.Info)))
+			fmt.Println(strings.Join(c.Expected, "\n"))
+			fmt.Println(strings.Repeat("-", len(c.Info)))
+
+			prompt := promptui.Select{
+				Label: "Is the output same as expected output?",
+				Items: []string{"Yes", "No", "I don't know"},
+			}
+
+			_, result, err := prompt.Run()
+
+			if err != nil {
+				utils.Err("prompt", fmt.Sprintf("Prompt failed: %v", err))
+				return
+			}
+
+			fmt.Printf("You choose %q. Continuing...\n", result)
 		}
 	},
 }

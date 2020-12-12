@@ -1,18 +1,18 @@
 [
   {
     "id":"1",
-    "info":"This is a sample info for step 1. Here we try the ls command",
+    "info":"This is a sample info for step 1. The ls command should show the available files in the current directory",
     "input":"ls",
     "expected":[
-      "LICENSE  README.md  cmd  examples  go.mod  go.sum  internal  main.go"
+      "apollo  test.md  test.py"
     ]
   },
   {
     "id":"2",
-    "info":"This is a sample info for step 2. Here we try pwd command",
-    "input":"pwd",
+    "info":"In this step you need to update the test.md file and then continue\nIn line 2 of the file, add # Hello World",
+    "input":"vim test.md",
     "expected":[
-      "/home/sidv/go_projs/cli_projs/ge_healthcare"
+      "# hello\n# Hello world"
     ]
   }
 ]

@@ -76,41 +76,9 @@ var startCmd = &cobra.Command{
 			}
 
 			if c.Type == apollo.Code {
-				if *cmds[i-1].Data.Text == "Output" || cmds[i-1].Type == apollo.Paragraph {
+				if strip.StripTags(*cmds[i-1].Data.Text) == "Output" {
 					fmt.Println(styles.InfoStyle.Style("EXPECTED OUTPUT"))
 					fmt.Println(chalk.Green.Color(*c.Data.Code))
-
-				} else {
-					utils.Info("cmd", fmt.Sprintf("%s %s", "command:", chalk.Green.Color(*c.Data.Code)))
-					l := strings.Split(*c.Data.Code, " ")
-
-					if l[0] == "vim" || l[0] == "nano" {
-						utils.Info("sill", "execute the above command in a new terminal instance")
-						utils.Info("sill", "continue after following the above steps and saving the file")
-					} else {
-
-						cmdPath, err := exec.LookPath(l[0])
-						if err != nil {
-							execWhichCmd(l[0])
-						}
-						sub := l[1:]
-						sub = append([]string{""}, sub...)
-						cmd := exec.Cmd{Path: cmdPath, Args: sub}
-
-						var outb, errb bytes.Buffer
-						cmd.Stdout = &outb
-						cmd.Stderr = &errb
-
-						err = cmd.Run()
-						if err != nil {
-							utils.Err("fatal", err.Error())
-							os.Exit(1)
-						}
-						fmt.Println()
-						fmt.Println(styles.InfoStyle.Style("OUTPUT"))
-						fmt.Println(outb.String())
-					}
-
 					prompt := promptui.Select{
 						Label: "Is the output same as expected output?",
 						Items: []string{"Yes", "No", "I don't know"},
@@ -124,7 +92,52 @@ var startCmd = &cobra.Command{
 					}
 
 					fmt.Printf("You choose %q. Continuing...\n", result)
+					continue
 				}
+				utils.Info("cmd", fmt.Sprintf("%s %s", "command:", chalk.Green.Color(*c.Data.Code)))
+				l := strings.Split(*c.Data.Code, " ")
+
+				if l[0] == "vim" || l[0] == "nano" {
+					utils.Info("sill", "execute the above command in a new terminal instance")
+					utils.Info("sill", "continue after following the above steps and saving the file")
+					prompt := promptui.Select{
+						Label: "Have you edited the file?",
+						Items: []string{"Yes", "No"},
+					}
+
+					_, result, err := prompt.Run()
+
+					if err != nil {
+						utils.Err("prompt", fmt.Sprintf("Prompt failed: %v", err))
+						return
+					}
+
+					fmt.Printf("You choose %q. Continuing...\n", result)
+
+				} else {
+					utils.Info("sill", "finding "+l[0])
+					cmdPath, err := exec.LookPath(l[0])
+					if err != nil {
+						// execWhichCmd(l[0])
+					}
+					sub := l[1:]
+					sub = append([]string{""}, sub...)
+					cmd := exec.Cmd{Path: cmdPath, Args: sub}
+
+					var outb, errb bytes.Buffer
+					cmd.Stdout = &outb
+					cmd.Stderr = &errb
+
+					err = cmd.Run()
+					if err != nil {
+						utils.Err("fatal", err.Error())
+						os.Exit(1)
+					}
+					fmt.Println()
+					fmt.Println(styles.InfoStyle.Style("OUTPUT"))
+					fmt.Println(outb.String())
+				}
+
 			}
 		}
 	},

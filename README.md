@@ -1,13 +1,19 @@
 # Apollo
 
 A CLI Tool to manage your VMs
-
 Created for [HackOff 3.0](https://hackoff.tech)
 
 > Submitted under GE Healthcare problem statement
 
-# Instructions to Install
-:todo
+[![asciicast](https://asciinema.org/a/XwwQFINlP1ke3zOUE0QMZh1Vz.svg)](https://asciinema.org/a/XwwQFINlP1ke3zOUE0QMZh1Vz)
 
-# List of available commands
-:todo
+# Instructions to Install
+
+Download the binary from [releases](/releases) and add it to PATH
+
+or 
+
+```bash
+go get -u github.com/BRO3886/apollo
+```
+

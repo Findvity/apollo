@@ -1,18 +1,133 @@
-[
-  {
-    "id":"1",
-    "info":"This is a sample info for step 1. The ls command should show the available files in the current directory",
-    "input":"ls",
-    "expected":[
-      "apollo  test.md  test.py"
-    ]
-  },
-  {
-    "id":"2",
-    "info":"In this step you need to update the test.md file and then continue\nIn line 2 of the file, add # Hello World",
-    "input":"vim test.md",
-    "expected":[
-      "# hello\n# Hello world"
-    ]
-  }
-]
+{
+  "time": 1607834105846,
+  "blocks": [
+    {
+      "type": "header",
+      "data": {
+        "text": "Some tutorial",
+        "level": 2
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "<b>Step 1</b>"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "In this step, we try out the ls command"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "<b>Input</b>"
+      }
+    },
+    {
+      "type": "code",
+      "data": {
+        "code": "ls"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "<b>Expected Output</b>"
+      }
+    },
+    {
+      "type": "code",
+      "data": {
+        "code": "test.md\ntest.py"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "<b>Step 2</b>"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "In this step, you need to open the test.md file in a text editor and add a line to it. On line 2, you need to add \"# Hello World\""
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "<b>Input</b>"
+      }
+    },
+    {
+      "type": "code",
+      "data": {
+        "code": "vim test.md"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "<b>Output</b>"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "After editing the file it should look like this:"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "# hello"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "# Hello World"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "<b>Step 3</b>"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "In this step, we'll run a sample python script. To run a python script, you need to run:<br>\"python3 &lt;script name&gt;\""
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "<b>Input</b>"
+      }
+    },
+    {
+      "type": "code",
+      "data": {
+        "code": "python3 test.py"
+      }
+    },
+    {
+      "type": "paragraph",
+      "data": {
+        "text": "<b>Output</b>"
+      }
+    },
+    {
+      "type": "code",
+      "data": {
+        "code": "hello world"
+      }
+    }
+  ],
+  "version": "2.19.1"
+}

@@ -3,6 +3,7 @@ module github.com/BRO3886/apollo
 go 1.15
 
 require (
+	github.com/grokify/html-strip-tags-go v0.0.0-20200923094847-079d207a09f1
 	github.com/json-iterator/go v1.1.10
 	github.com/manifoldco/promptui v0.8.0
 	github.com/mitchellh/go-homedir v1.1.0

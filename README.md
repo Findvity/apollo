@@ -9,7 +9,7 @@ Created for [HackOff 3.0](https://hackoff.tech)
 
 # Instructions to Install
 
-Download the binary from [releases](/releases) and add it to PATH
+Download the binary from [releases](https://github.com/Findvity/apollo/releases) and add it to PATH
 
 or 
 
